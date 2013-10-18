@@ -1,9 +1,11 @@
 PolymorphicExample::Application.routes.draw do
   resources :photos
-
+    resources :comments do
+  end
   resources :posts
+    resources :comments do
+  end    
 
-  resources :comments
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
