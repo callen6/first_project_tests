@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :set_commentable, only: [:index]
+  before_action :set_commentable
   # GET /comments
   # GET /comments.json
   def index
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to [@commentable, @comment], notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url }
+      format.html { redirect_to [@commentable, :comments]}
       format.json { head :no_content }
     end
   end
@@ -67,6 +67,8 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
     def set_commentable
+      # trying to make this turn into @commentable = Photo.find(photo_id) where 
+      # photo_id = 1
       @commentable = params[:commentable].classify.constantize.find(commentable_id)
     end
 
