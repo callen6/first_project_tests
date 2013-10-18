@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_commentable, only: [:index]
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = @commentable.comments
   end
 
   # GET /comments/1
@@ -65,6 +65,13 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
+    end
+    def set_commentable
+      @commentable = params[:commentable].classify.constantize.find(commentable_id)
+    end
+
+    def commentable_id
+      params[(params[:commentable] + "_id").to_sym]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
