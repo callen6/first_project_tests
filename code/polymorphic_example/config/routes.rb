@@ -1,5 +1,7 @@
 PolymorphicExample::Application.routes.draw do
   
+  resources :videos
+
   resources :photos do
     resources :comments, defaults: {commentable: 'photo'}
   end
