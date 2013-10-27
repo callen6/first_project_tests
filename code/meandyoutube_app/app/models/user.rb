@@ -5,14 +5,15 @@ class User < ActiveRecord::Base
 
 	def self.create_from_omniauth(auth_hash)
 		create! do |user|
-			user.provider = auth["provider"]
-			user.uid = auth["uid"]
-			user.name = auth["info"]["name"]
-			user.email = auth["info"]["email"]
-			user.image = auth["info"]["image"]
-			user.first_name = auth["info"]["first_name"]
-			user.token = auth["credentials"]["token"]
-			user.refresh_token = auth["credentials"]["refresh_token"]
-			user.expires_at = auth["credentials"]["expires_at"]
+			user.provider = auth_hash["provider"]
+			user.uid = auth_hash["uid"]
+			user.name = auth_hash["info"]["name"]
+			user.email = auth_hash["info"]["email"]
+			user.image = auth_hash["info"]["image"]
+			user.first_name = auth_hash["info"]["first_name"]
+			user.token = auth_hash["credentials"]["token"]
+			user.refresh_token = auth_hash["credentials"]["refresh_token"]
+			user.expires_at = auth_hash["credentials"]["expires_at"]
+		end
 	end
 end
