@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :token
       t.string :refresh_token
-      t.bigint :expires_at
+      t.integer :expires_at
     end
   end
 end
