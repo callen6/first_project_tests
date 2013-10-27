@@ -1,3 +1,3 @@
 MeandyoutubeApp::Application.routes.draw do
-  match 'auth/:provider/callback'
+  match 'auth/:provider/callback', to: 'sessions#create'
 end
